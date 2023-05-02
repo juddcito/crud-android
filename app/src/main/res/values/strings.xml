@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Android CRUD</string>
+    <string name="title_activity_country_crud">CountryCRUD</string>
 </resources>
