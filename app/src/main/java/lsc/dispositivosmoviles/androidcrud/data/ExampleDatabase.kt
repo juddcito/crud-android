@@ -3,8 +3,9 @@ package lsc.dispositivosmoviles.androidcrud.data
 import androidx.room.Database
 import androidx.room.RoomDatabase
 
-@Database(entities = [CountryEntity::class], version = 2)
+@Database(entities = [CountryEntity::class, CityEntity::class, CountryLanguageEntity::class, TouristPointEntity::class], version = 1)
 abstract class ExampleDatabase: RoomDatabase() {
-    abstract val dao: CountryDao
-
+    abstract val countryDao: CountryDao
+    abstract val cityDao: CityDao
+    abstract val TouristPointDao: TouristPointDao
 }

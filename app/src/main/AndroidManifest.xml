@@ -12,6 +12,26 @@
         android:theme="@style/Theme.AndroidCRUD"
         tools:targetApi="31">
         <activity
+            android:name=".TouristPointCRUD"
+            android:exported="false"
+            android:label="@string/title_activity_tourist_point_crud"
+            android:theme="@style/Theme.AndroidCRUD" />
+        <activity
+            android:name=".CityCRUD"
+            android:exported="false"
+            android:label="@string/title_activity_city_crud"
+            android:theme="@style/Theme.AndroidCRUD" />
+        <activity
+            android:name=".CountryRead"
+            android:exported="false"
+            android:label="@string/title_activity_country_read"
+            android:theme="@style/Theme.AndroidCRUD" />
+        <activity
+            android:name=".HomeScreen"
+            android:exported="false"
+            android:label="@string/title_activity_home_screen"
+            android:theme="@style/Theme.AndroidCRUD" />
+        <activity
             android:name=".CountryItem"
             android:exported="false"
             android:label="@string/title_activity_country_item"

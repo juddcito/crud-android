@@ -39,7 +39,6 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun MainMenu() {
     val context = LocalContext.current
-
     Column(
         modifier = Modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally

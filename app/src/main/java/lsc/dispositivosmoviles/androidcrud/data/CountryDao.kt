@@ -13,5 +13,4 @@ interface CountryDao {
 
     @Delete
     suspend fun deleteCountry(country: CountryEntity)
-
 }

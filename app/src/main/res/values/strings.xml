@@ -2,4 +2,8 @@
     <string name="app_name">Android CRUD</string>
     <string name="title_activity_country_crud">CountryCRUD</string>
     <string name="title_activity_country_item">CountryItem</string>
+    <string name="title_activity_home_screen">HomeScreen</string>
+    <string name="title_activity_country_read">CountryRead</string>
+    <string name="title_activity_city_crud">CityCRUD</string>
+    <string name="title_activity_tourist_point_crud">TouristPointCRUD</string>
 </resources>
