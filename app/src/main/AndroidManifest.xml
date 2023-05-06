@@ -12,6 +12,11 @@
         android:theme="@style/Theme.AndroidCRUD"
         tools:targetApi="31">
         <activity
+            android:name=".CountryItem"
+            android:exported="false"
+            android:label="@string/title_activity_country_item"
+            android:theme="@style/Theme.AndroidCRUD" />
+        <activity
             android:name=".CountryCRUD"
             android:exported="false"
             android:label="@string/title_activity_country_crud"
