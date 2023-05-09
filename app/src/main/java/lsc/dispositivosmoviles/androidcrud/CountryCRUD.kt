@@ -27,6 +27,7 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.room.Room
+import lsc.dispositivosmoviles.androidcrud.data.CountryEntity
 import lsc.dispositivosmoviles.androidcrud.data.ExampleDatabase
 import lsc.dispositivosmoviles.androidcrud.ui.theme.AndroidCRUDTheme
 
@@ -39,7 +40,7 @@ class CountryCRUD : ComponentActivity() {
                 // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colors.background
+                    color = Color(0xFFF5F5FF)
                 ) {
                     val database = Room.databaseBuilder(this, ExampleDatabase::class.java, "crud_db").build()
                     val dao = database.countryDao
@@ -61,6 +62,7 @@ class CountryCRUD : ComponentActivity() {
 fun CountryApp(viewModel: CountryViewModel) {
     val state = viewModel.state
     val context = LocalContext.current
+    var items by remember { mutableStateOf(emptyList<CountryEntity>()) }
     Column(
         modifier = Modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
@@ -87,6 +89,7 @@ fun CountryApp(viewModel: CountryViewModel) {
                     )
                 }
             },
+            backgroundColor = Color(0XFF0D47A1),
             navigationIcon = {
                 IconButton(
                     onClick = {
@@ -94,7 +97,7 @@ fun CountryApp(viewModel: CountryViewModel) {
                         ContextCompat.startActivity(context, intent, null)
                     }
                 ) {
-                    Icon(Icons.Default.ArrowBack, contentDescription = "Navegación hacia atrás")
+                    Icon(Icons.Default.ArrowBack, contentDescription = "Navegación hacia atrás", tint = Color.White)
                 }
             }
         )
@@ -105,8 +108,12 @@ fun CountryApp(viewModel: CountryViewModel) {
         ) {
             Spacer(modifier = Modifier.height(16.dp))
             Button(
-                onClick = { /* Acción del botón */ },
-                modifier = Modifier.fillMaxWidth()
+                onClick = {
+                    val intent = Intent(context, CountryCreate::class.java)
+                    ContextCompat.startActivity(context, intent, null)
+                },
+                modifier = Modifier.fillMaxWidth(),
+                colors = ButtonDefaults.buttonColors(backgroundColor = Color(0XFF42A5F5))
             ) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Icon(
@@ -117,13 +124,14 @@ fun CountryApp(viewModel: CountryViewModel) {
                     Spacer(modifier = Modifier.width(8.dp))
                     Text(
                         text = "Add Country",
-                        fontWeight = FontWeight.Bold
+                        fontWeight = FontWeight.Bold,
+                        color = Color.White
                     )
                 }
             }
         }
-        val itemsContinent = listOf("Continent", "America", "Europe", "Asia")
-        val itemsLanguage = listOf("Language", "Spanish", "English", "Chinese")
+        val itemsContinent = listOf("Continent", "America", "Europe", "Asia", "Africa", "Oceania")
+        val itemsLanguage = listOf("Language", "Spanish", "English", "French", "German", "Italian","Chinese","Japanese")
         var selectedItemContinent by remember { mutableStateOf(itemsContinent.first()) }
         var selectedItemLanguage by remember { mutableStateOf(itemsLanguage.first()) }
         Row(
@@ -137,8 +145,26 @@ fun CountryApp(viewModel: CountryViewModel) {
             CustomComboBox(items = itemsContinent, selectedItem = selectedItemContinent, onItemSelected = { selectedItemContinent = it })
             CustomComboBox(items = itemsLanguage, selectedItem = selectedItemLanguage, onItemSelected = { selectedItemLanguage = it })
             IconButton(onClick = {
+                if((selectedItemContinent == "Continent") && (selectedItemLanguage == "Language")){
+                    viewModel.getAllCountries()
+                } else if ((selectedItemContinent != "Continent") && (selectedItemLanguage == "Language")){
+                    viewModel.getFilteredCountriesByContinent(selectedItemContinent)
+                } else if ((selectedItemContinent == "Continent") && (selectedItemLanguage != "Language")){
+                    viewModel.getFilteredCountriesByLanguage(selectedItemLanguage)
+                } else{
+                    viewModel.getFilteredCountriesByContinentAndLanguage(selectedItemContinent,selectedItemLanguage)
+                }
+            }) {
+                Icon(
+                    painter = painterResource(id = R.drawable.search),
+                    contentDescription = "search icon",
+                    modifier = Modifier.size(32.dp)
+                )
+            }
+            IconButton(onClick = {
                 selectedItemContinent = itemsContinent.first()
                 selectedItemLanguage = itemsLanguage.first()
+                viewModel.getAllCountries()
             }) {
                 Icon(
                     painter = painterResource(id = R.drawable.eraser),
@@ -147,9 +173,10 @@ fun CountryApp(viewModel: CountryViewModel) {
                 )
             }
         }
+
         LazyColumn(modifier = Modifier.fillMaxWidth()){
             items(state.countries){
-                CountryItem(country = it)
+                CountryItem(country = it, viewModel = viewModel)
             }
         }
     }

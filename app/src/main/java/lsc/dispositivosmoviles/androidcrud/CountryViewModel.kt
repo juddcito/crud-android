@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import lsc.dispositivosmoviles.androidcrud.data.CountryDao
+import lsc.dispositivosmoviles.androidcrud.data.CountryEntity
 
 class CountryViewModel(
     private val dao: CountryDao
@@ -28,5 +29,49 @@ class CountryViewModel(
         state = state.copy(
             name = name
         )
+    }
+
+    fun getAllCountries(){
+        viewModelScope.launch {
+            dao.getCountries().collectLatest {
+                state = state.copy(countries = it)
+            }
+        }
+    }
+
+    fun createCountry(country: CountryEntity){
+        viewModelScope.launch {
+            dao.insertCountry(country)
+        }
+    }
+
+    fun getFilteredCountriesByContinentAndLanguage(continent: String, language: String){
+        viewModelScope.launch {
+            dao.getFilteredCountriesByContinentLanguage(continent, language).collectLatest {
+                state = state.copy(countries = it)
+            }
+        }
+    }
+
+    fun getFilteredCountriesByContinent(continent: String){
+        viewModelScope.launch {
+            dao.getFilteredCountriesByContinent(continent).collectLatest {
+                state = state.copy(countries = it)
+            }
+        }
+    }
+
+    fun getFilteredCountriesByLanguage(language: String){
+        viewModelScope.launch {
+            dao.getFilteredCountriesByLanguage(language).collectLatest {
+                state = state.copy(countries = it)
+            }
+        }
+    }
+
+    fun deleteCountry(country: CountryEntity){
+        viewModelScope.launch {
+            dao.deleteCountry(country)
+        }
     }
 }

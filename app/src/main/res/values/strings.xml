@@ -6,4 +6,6 @@
     <string name="title_activity_country_read">CountryRead</string>
     <string name="title_activity_city_crud">CityCRUD</string>
     <string name="title_activity_tourist_point_crud">TouristPointCRUD</string>
+    <string name="title_activity_country_update">CountryUpdate</string>
+    <string name="title_activity_country_create">CountryCreate</string>
 </resources>

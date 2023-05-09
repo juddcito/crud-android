@@ -86,7 +86,10 @@ fun MainMenu() {
         }
         Spacer(modifier = Modifier.height(32.dp))
         Button(
-            onClick = { /*TODO*/ },
+            onClick = {
+                val intent = Intent(context, CityCRUD::class.java)
+                ContextCompat.startActivity(context, intent, null)
+            },
             modifier = Modifier.width(256.dp)
         ) {
             Row(

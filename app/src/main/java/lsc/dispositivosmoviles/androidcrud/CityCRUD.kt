@@ -101,7 +101,7 @@ fun CityCRUDApp() {
                     )
                     Spacer(modifier = Modifier.width(8.dp))
                     Text(
-                        text = "Add Country",
+                        text = "Add City",
                         fontWeight = FontWeight.Bold
                     )
                 }

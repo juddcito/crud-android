@@ -1,5 +1,6 @@
 package lsc.dispositivosmoviles.androidcrud
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -13,16 +14,22 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import androidx.core.content.ContextCompat.startActivity
 import lsc.dispositivosmoviles.androidcrud.data.CountryEntity
 import lsc.dispositivosmoviles.androidcrud.ui.theme.AndroidCRUDTheme
 
 @Composable
 fun CountryItem(
-    country: CountryEntity
+    country: CountryEntity,
+    viewModel: CountryViewModel
 ) {
+    val context = LocalContext.current
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -33,31 +40,45 @@ fun CountryItem(
         Column(
             modifier = Modifier.padding(16.dp)// ajusta el relleno dentro de la tarjeta
         ) {
-            Text(country.name)
-            Text(country.countryCode)
+            country.name?.let { Text(it, fontSize = 18.sp, fontWeight = FontWeight.Bold) }
+            country.countryCode?.let { Text(it) }
+            country.continent?.let { Text(it) }
+            country.region?.let { Text(it) }
         }
         Row(
             horizontalArrangement = Arrangement.End,
             verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp)
+            modifier = Modifier.padding(32.dp)
         ) {
-            IconButton(onClick = { /*TODO*/ }) {
+            IconButton(
+                onClick = {
+                    val intent = Intent(context, CountryRead::class.java)
+                    intent.putExtra("country", country)
+                    startActivity(context,intent,null)
+                }
+            ) {
                 Icon(
                     painterResource(id = R.drawable.eye),
                     contentDescription = "",
                     modifier = Modifier.size(32.dp)
                 )
             }
-            IconButton(onClick = { /*TODO*/ }) {
+            IconButton(
+                onClick = {
+                    val intent = Intent(context, CountryUpdate::class.java)
+                    intent.putExtra("country", country)
+                    startActivity(context,intent,null)
+                }
+            ) {
                 Icon(
                     painterResource(id = R.drawable.pencil),
                     contentDescription = "",
                     modifier = Modifier.size(32.dp)
                 )
             }
-            IconButton(onClick = { /*TODO*/ }) {
+            IconButton(onClick = {
+                    viewModel.deleteCountry(country)
+            }) {
                 Icon(
                     painterResource(id = R.drawable.delete),
                     contentDescription = "",
