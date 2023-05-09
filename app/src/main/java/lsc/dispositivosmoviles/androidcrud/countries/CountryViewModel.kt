@@ -1,4 +1,4 @@
-package lsc.dispositivosmoviles.androidcrud
+package lsc.dispositivosmoviles.androidcrud.countries
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -24,12 +24,6 @@ class CountryViewModel(
 
     var state by mutableStateOf(CountryState())
         private set
-
-    fun onNameChange(name: String){
-        state = state.copy(
-            name = name
-        )
-    }
 
     fun getAllCountries(){
         viewModelScope.launch {

@@ -12,12 +12,17 @@
         android:theme="@style/Theme.AndroidCRUD"
         tools:targetApi="31">
         <activity
-            android:name=".CountryCreate"
+            android:name=".CityItem"
+            android:exported="false"
+            android:label="@string/title_activity_city_item"
+            android:theme="@style/Theme.AndroidCRUD" />
+        <activity
+            android:name=".countries.CountryCreate"
             android:exported="false"
             android:label="@string/title_activity_country_create"
             android:theme="@style/Theme.AndroidCRUD" />
         <activity
-            android:name=".CountryUpdate"
+            android:name=".countries.CountryUpdate"
             android:exported="false"
             android:label="@string/title_activity_country_update"
             android:theme="@style/Theme.AndroidCRUD" />
@@ -27,12 +32,12 @@
             android:label="@string/title_activity_tourist_point_crud"
             android:theme="@style/Theme.AndroidCRUD" />
         <activity
-            android:name=".CityCRUD"
+            android:name=".cities.CityCRUD"
             android:exported="false"
             android:label="@string/title_activity_city_crud"
             android:theme="@style/Theme.AndroidCRUD" />
         <activity
-            android:name=".CountryRead"
+            android:name=".countries.CountryRead"
             android:exported="false"
             android:label="@string/title_activity_country_read"
             android:theme="@style/Theme.AndroidCRUD" />
@@ -47,7 +52,7 @@
             android:label="@string/title_activity_country_item"
             android:theme="@style/Theme.AndroidCRUD" />
         <activity
-            android:name=".CountryCRUD"
+            android:name=".countries.CountryCRUD"
             android:exported="false"
             android:label="@string/title_activity_country_crud"
             android:theme="@style/Theme.AndroidCRUD" />

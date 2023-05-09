@@ -1,4 +1,4 @@
-package lsc.dispositivosmoviles.androidcrud
+package lsc.dispositivosmoviles.androidcrud.countries
 
 import android.content.Intent
 import android.os.Bundle
@@ -27,6 +27,8 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.room.Room
+import lsc.dispositivosmoviles.androidcrud.MainActivity
+import lsc.dispositivosmoviles.androidcrud.R
 import lsc.dispositivosmoviles.androidcrud.data.CountryEntity
 import lsc.dispositivosmoviles.androidcrud.data.ExampleDatabase
 import lsc.dispositivosmoviles.androidcrud.ui.theme.AndroidCRUDTheme

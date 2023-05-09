@@ -4,6 +4,7 @@ import android.os.Parcel
 import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.ForeignKey
+import androidx.room.Index
 import androidx.room.PrimaryKey
 
 @Entity(
@@ -16,21 +17,24 @@ import androidx.room.PrimaryKey
             onUpdate = ForeignKey.CASCADE,
             onDelete = ForeignKey.CASCADE
         )
-    ]
+    ],
+    indices = [Index(value = ["name"], unique = true)]
 )
 data class CityEntity(
     @PrimaryKey(autoGenerate = true) val id: Int,
     val name: String?,
     val countryCode: String?,
     val district: String?,
-    val population: Int
+    val population: Int,
+    val language: String?
 ) : Parcelable{
     constructor(parcel: Parcel) : this(
         parcel.readInt(),
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
-        parcel.readInt()
+        parcel.readInt(),
+        parcel.readString()
     ) {
     }
 
@@ -40,6 +44,7 @@ data class CityEntity(
         parcel.writeString(countryCode)
         parcel.writeString(district)
         parcel.writeInt(population)
+        parcel.writeString(language)
     }
 
     override fun describeContents(): Int {

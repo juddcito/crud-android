@@ -1,9 +1,10 @@
-package lsc.dispositivosmoviles.androidcrud
+package lsc.dispositivosmoviles.androidcrud.cities
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -20,10 +21,17 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.room.Room
+import lsc.dispositivosmoviles.androidcrud.MainActivity
+import lsc.dispositivosmoviles.androidcrud.R
+import lsc.dispositivosmoviles.androidcrud.countries.CustomComboBox
+import lsc.dispositivosmoviles.androidcrud.data.CountryEntity
+import lsc.dispositivosmoviles.androidcrud.data.ExampleDatabase
 import lsc.dispositivosmoviles.androidcrud.ui.theme.ui.theme.AndroidCRUDTheme
 
 class CityCRUD : ComponentActivity() {
@@ -34,9 +42,18 @@ class CityCRUD : ComponentActivity() {
                 // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colors.background
+                    color = Color(0xFFF5F5FF)
                 ) {
-                    CityCRUDApp()
+                    val database = Room.databaseBuilder(this, ExampleDatabase::class.java, "crud_db").build()
+                    val cityDao = database.cityDao
+                    val viewModel by viewModels<CityViewModel>(factoryProducer = {
+                        object : ViewModelProvider.Factory{
+                            override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+                                return CityViewModel(cityDao) as T
+                            }
+                        }
+                    })
+                    CityCRUDApp(viewModel)
                 }
             }
         }
@@ -44,8 +61,10 @@ class CityCRUD : ComponentActivity() {
 }
 
 @Composable
-fun CityCRUDApp() {
+fun CityCRUDApp(viewModel: CityViewModel) {
+    val state = viewModel.state
     val context = LocalContext.current
+    var items by remember { mutableStateOf(emptyList<CountryEntity>()) }
     Column(
         modifier = Modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
@@ -59,7 +78,7 @@ fun CityCRUDApp() {
                     Spacer(modifier = Modifier.width(64.dp))
                     Image(
                         painter = painterResource(id = R.drawable.cities),
-                        contentDescription = "world icon",
+                        contentDescription = "cities icon",
                         modifier = Modifier.size(32.dp),
                         colorFilter = ColorFilter.tint(Color.White)
                     )
@@ -72,6 +91,7 @@ fun CityCRUDApp() {
                     )
                 }
             },
+            backgroundColor = Color(0XFFFFA726),
             navigationIcon = {
                 IconButton(
                     onClick = {
@@ -79,7 +99,7 @@ fun CityCRUDApp() {
                         ContextCompat.startActivity(context, intent, null)
                     }
                 ) {
-                    Icon(Icons.Default.ArrowBack, contentDescription = "Navegación hacia atrás")
+                    Icon(Icons.Default.ArrowBack, contentDescription = "Navegación hacia atrás", tint = Color.White)
                 }
             }
         )
@@ -91,7 +111,8 @@ fun CityCRUDApp() {
             Spacer(modifier = Modifier.height(16.dp))
             Button(
                 onClick = { /* Acción del botón */ },
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth(),
+                colors = ButtonDefaults.buttonColors(backgroundColor = Color(0XFFFFB74D))
             ) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Icon(
@@ -102,7 +123,8 @@ fun CityCRUDApp() {
                     Spacer(modifier = Modifier.width(8.dp))
                     Text(
                         text = "Add City",
-                        fontWeight = FontWeight.Bold
+                        fontWeight = FontWeight.Bold,
+                        color = Color.White
                     )
                 }
             }
@@ -132,18 +154,10 @@ fun CityCRUDApp() {
                 )
             }
         }
-        //LazyColumn(modifier = Modifier.fillMaxWidth()){
-         //   items(state.countries){
-        //      CountryItem(country = it)
-         //   }
-        //}
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview2() {
-    AndroidCRUDTheme {
-        CityCRUDApp()
+        LazyColumn(modifier = Modifier.fillMaxWidth()){
+            items(state.cities){
+                CityItem(city = it, viewModel = viewModel)
+            }
+        }
     }
 }

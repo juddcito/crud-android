@@ -1,4 +1,4 @@
-package lsc.dispositivosmoviles.androidcrud
+package lsc.dispositivosmoviles.androidcrud.countries
 
 import android.content.Intent
 import android.os.Bundle
@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -28,6 +27,7 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.room.Room
+import lsc.dispositivosmoviles.androidcrud.R
 import lsc.dispositivosmoviles.androidcrud.data.CountryEntity
 import lsc.dispositivosmoviles.androidcrud.data.ExampleDatabase
 import lsc.dispositivosmoviles.androidcrud.ui.theme.AndroidCRUDTheme

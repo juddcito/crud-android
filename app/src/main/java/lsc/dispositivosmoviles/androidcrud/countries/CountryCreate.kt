@@ -1,4 +1,4 @@
-package lsc.dispositivosmoviles.androidcrud
+package lsc.dispositivosmoviles.androidcrud.countries
 
 import android.content.Intent
 import android.os.Bundle
@@ -24,17 +24,16 @@ import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.SoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.room.Room
+import lsc.dispositivosmoviles.androidcrud.R
 import lsc.dispositivosmoviles.androidcrud.data.CountryEntity
 import lsc.dispositivosmoviles.androidcrud.data.ExampleDatabase
 import lsc.dispositivosmoviles.androidcrud.ui.theme.AndroidCRUDTheme

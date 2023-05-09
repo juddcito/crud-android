@@ -1,4 +1,4 @@
-package lsc.dispositivosmoviles.androidcrud
+package lsc.dispositivosmoviles.androidcrud.touristpoints
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity

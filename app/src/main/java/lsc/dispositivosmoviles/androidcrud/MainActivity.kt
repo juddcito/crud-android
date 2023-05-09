@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.viewModels
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
@@ -17,6 +16,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
+import lsc.dispositivosmoviles.androidcrud.cities.CityCRUD
+import lsc.dispositivosmoviles.androidcrud.countries.CountryCRUD
 import lsc.dispositivosmoviles.androidcrud.ui.theme.AndroidCRUDTheme
 
 class MainActivity : ComponentActivity() {

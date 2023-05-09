@@ -1,33 +1,28 @@
-package lsc.dispositivosmoviles.androidcrud
+package lsc.dispositivosmoviles.androidcrud.cities
 
 import android.content.Intent
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.core.content.ContextCompat.startActivity
-import lsc.dispositivosmoviles.androidcrud.data.CountryEntity
-import lsc.dispositivosmoviles.androidcrud.ui.theme.AndroidCRUDTheme
+import androidx.core.content.ContextCompat
+import lsc.dispositivosmoviles.androidcrud.R
+import lsc.dispositivosmoviles.androidcrud.countries.CountryRead
+import lsc.dispositivosmoviles.androidcrud.countries.CountryUpdate
+import lsc.dispositivosmoviles.androidcrud.data.CityEntity
 
 @Composable
-fun CountryItem(
-    country: CountryEntity,
-    viewModel: CountryViewModel
+fun CityItem(
+    city: CityEntity,
+    viewModel: CityViewModel
 ) {
     val context = LocalContext.current
     Card(
@@ -40,10 +35,8 @@ fun CountryItem(
         Column(
             modifier = Modifier.padding(16.dp)// ajusta el relleno dentro de la tarjeta
         ) {
-            country.name?.let { Text(it, fontSize = 18.sp, fontWeight = FontWeight.Bold) }
-            country.countryCode?.let { Text(it) }
-            country.continent?.let { Text(it) }
-            country.region?.let { Text(it) }
+            city.name?.let { Text(it, fontSize = 18.sp, fontWeight = FontWeight.Bold) }
+            city.countryCode?.let { Text(it) }
         }
         Row(
             horizontalArrangement = Arrangement.End,
@@ -53,8 +46,8 @@ fun CountryItem(
             IconButton(
                 onClick = {
                     val intent = Intent(context, CountryRead::class.java)
-                    intent.putExtra("country", country)
-                    startActivity(context,intent,null)
+                    intent.putExtra("city", city)
+                    ContextCompat.startActivity(context,intent,null)
                 }
             ) {
                 Icon(
@@ -66,8 +59,8 @@ fun CountryItem(
             IconButton(
                 onClick = {
                     val intent = Intent(context, CountryUpdate::class.java)
-                    intent.putExtra("country", country)
-                    startActivity(context,intent,null)
+                    intent.putExtra("city", city)
+                    ContextCompat.startActivity(context,intent,null)
                 }
             ) {
                 Icon(
@@ -77,7 +70,7 @@ fun CountryItem(
                 )
             }
             IconButton(onClick = {
-                    viewModel.deleteCountry(country)
+                viewModel.deleteCity(city)
             }) {
                 Icon(
                     painterResource(id = R.drawable.delete),
@@ -88,3 +81,4 @@ fun CountryItem(
         }
     }
 }
+

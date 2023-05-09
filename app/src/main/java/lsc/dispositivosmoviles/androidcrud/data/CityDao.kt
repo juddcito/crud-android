@@ -8,7 +8,7 @@ interface CityDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertCity(cityEntity: CityEntity)
 
-    @Query("SELECT * FROM cities")
+    @Query("SELECT cities.name, cities.countryCode, cities.population, cities.district, countries.name FROM cities INNER JOIN countries ON cities.countryCode == countries.countryCode ")
     fun getCities(): Flow<List<CityEntity>>
 
     @Delete
