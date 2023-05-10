@@ -29,6 +29,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.room.Room
 import lsc.dispositivosmoviles.androidcrud.MainActivity
 import lsc.dispositivosmoviles.androidcrud.R
+import lsc.dispositivosmoviles.androidcrud.countries.CountryCreate
 import lsc.dispositivosmoviles.androidcrud.countries.CustomComboBox
 import lsc.dispositivosmoviles.androidcrud.data.CountryEntity
 import lsc.dispositivosmoviles.androidcrud.data.ExampleDatabase
@@ -110,7 +111,10 @@ fun CityCRUDApp(viewModel: CityViewModel) {
         ) {
             Spacer(modifier = Modifier.height(16.dp))
             Button(
-                onClick = { /* Acción del botón */ },
+                onClick = {
+                    val intent = Intent(context, CityCreate::class.java)
+                    ContextCompat.startActivity(context, intent, null)
+                },
                 modifier = Modifier.fillMaxWidth(),
                 colors = ButtonDefaults.buttonColors(backgroundColor = Color(0XFFFFB74D))
             ) {
@@ -140,7 +144,7 @@ fun CityCRUDApp(viewModel: CityViewModel) {
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceEvenly
         ) {
-            Text(text = "FILTERS")
+            Text(text = "FILTERS", fontWeight = FontWeight.Bold)
             CustomComboBox(items = itemsContinent, selectedItem = selectedItemContinent, onItemSelected = { selectedItemContinent = it })
             CustomComboBox(items = itemsLanguage, selectedItem = selectedItemLanguage, onItemSelected = { selectedItemLanguage = it })
             IconButton(onClick = {

@@ -11,6 +11,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
@@ -18,6 +20,7 @@ import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
 import lsc.dispositivosmoviles.androidcrud.cities.CityCRUD
 import lsc.dispositivosmoviles.androidcrud.countries.CountryCRUD
+import lsc.dispositivosmoviles.androidcrud.touristpoints.TouristPointCRUD
 import lsc.dispositivosmoviles.androidcrud.ui.theme.AndroidCRUDTheme
 
 class MainActivity : ComponentActivity() {
@@ -28,7 +31,7 @@ class MainActivity : ComponentActivity() {
                 // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colors.background
+                    color = Color(0xFFF5F5FF)
                 ) {
                     MainMenu()
                 }
@@ -45,12 +48,14 @@ fun MainMenu() {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         TopAppBar(
-            title = { Text(text = "CRUD EXAMPLE",
+            title = {
+                Text(text = "ANDROID CRUD",
             textAlign = TextAlign.Center,
             modifier = Modifier
                 .fillMaxWidth()
                 .align(CenterHorizontally))
-            }
+            },
+            backgroundColor = Color(0XFFced4da)
         )
         Spacer(modifier = Modifier.height(108.dp))
         Image(
@@ -67,7 +72,8 @@ fun MainMenu() {
                 val intent = Intent(context, CountryCRUD::class.java)
                 ContextCompat.startActivity(context, intent, null)
             },
-            modifier = Modifier.width(256.dp)
+            modifier = Modifier.width(256.dp),
+            colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xffB2DFB2))
         ) {
             Row(
                 verticalAlignment = Alignment.CenterVertically,
@@ -79,7 +85,7 @@ fun MainMenu() {
                     contentDescription = "world icon",
                     modifier = Modifier
                         .size(32.dp)
-                        .fillMaxWidth()
+                        .fillMaxWidth(),
                 )
                 Spacer(modifier = Modifier.width(12.dp))
                 Text("COUNTRIES")
@@ -91,7 +97,8 @@ fun MainMenu() {
                 val intent = Intent(context, CityCRUD::class.java)
                 ContextCompat.startActivity(context, intent, null)
             },
-            modifier = Modifier.width(256.dp)
+            modifier = Modifier.width(256.dp),
+            colors = ButtonDefaults.buttonColors(backgroundColor = Color(0XFFB2CCFF))
         ) {
             Row(
                 verticalAlignment = Alignment.CenterVertically,
@@ -103,7 +110,7 @@ fun MainMenu() {
                     contentDescription = "world icon",
                     modifier = Modifier
                         .size(32.dp)
-                        .fillMaxWidth()
+                        .fillMaxWidth(),
                 )
                 Spacer(modifier = Modifier.width(12.dp))
                 Text("CITIES")
@@ -111,8 +118,12 @@ fun MainMenu() {
         }
         Spacer(modifier = Modifier.height(32.dp))
         Button(
-            onClick = { /*TODO*/ },
-            modifier = Modifier.width(256.dp)
+            onClick = {
+                val intent = Intent(context, TouristPointCRUD::class.java)
+                ContextCompat.startActivity(context, intent, null)
+            },
+            modifier = Modifier.width(256.dp),
+            colors = ButtonDefaults.buttonColors(backgroundColor = Color(0XFFF3C13A))
         ) {
             Row(
                 verticalAlignment = Alignment.CenterVertically,
@@ -124,7 +135,7 @@ fun MainMenu() {
                     contentDescription = "world icon",
                     modifier = Modifier
                         .size(32.dp)
-                        .fillMaxWidth()
+                        .fillMaxWidth(),
                 )
                 Spacer(modifier = Modifier.width(12.dp))
                 Text("TOURIST POINTS")

@@ -109,7 +109,7 @@ fun CountryCreateApp(viewModel: CountryViewModel) {
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.Center
                 ) {
-                    Spacer(modifier = Modifier.width(64.dp))
+                    Spacer(modifier = Modifier.width(32.dp))
                     Image(
                         painter = painterResource(id = R.drawable.world),
                         contentDescription = "world icon",
@@ -117,7 +117,7 @@ fun CountryCreateApp(viewModel: CountryViewModel) {
                         colorFilter = ColorFilter.tint(Color.White)
                     )
                     Text(
-                        text = "COUNTRIES",
+                        text = "CREATE COUNTRY",
                         color = Color.White,
                         fontWeight = FontWeight.Bold,
                         fontSize = 18.sp,
@@ -125,6 +125,7 @@ fun CountryCreateApp(viewModel: CountryViewModel) {
                     )
                 }
             },
+            backgroundColor = Color(0XFF0D47A1),
             navigationIcon = {
                 IconButton(
                     onClick = {
@@ -132,7 +133,7 @@ fun CountryCreateApp(viewModel: CountryViewModel) {
                         ContextCompat.startActivity(context, intent, null)
                     }
                 ) {
-                    Icon(Icons.Default.ArrowBack, contentDescription = "Navegación hacia atrás")
+                    Icon(Icons.Default.ArrowBack, contentDescription = "Navegación hacia atrás", tint = Color.White)
                 }
             }
         )
@@ -357,7 +358,8 @@ fun CountryCreateApp(viewModel: CountryViewModel) {
                             ).show()
                         }
                     },
-                    modifier = Modifier.padding(10.dp).width(400.dp).height(50.dp)
+                    modifier = Modifier.padding(10.dp).width(400.dp).height(50.dp),
+                    colors = ButtonDefaults.buttonColors(backgroundColor = Color(0XFF42A5F5)),
                 ) {
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Icon(
@@ -367,8 +369,9 @@ fun CountryCreateApp(viewModel: CountryViewModel) {
                         )
                         Spacer(modifier = Modifier.width(8.dp))
                         Text(
-                            text = "ADD COUNTRY",
-                            fontWeight = FontWeight.Bold
+                            text = "Add",
+                            fontWeight = FontWeight.Bold,
+                            color = Color.White
                         )
                     }
                 }

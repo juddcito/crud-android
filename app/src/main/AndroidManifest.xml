@@ -12,6 +12,41 @@
         android:theme="@style/Theme.AndroidCRUD"
         tools:targetApi="31">
         <activity
+            android:name=".touristpoints.TouristPointAdd"
+            android:exported="false"
+            android:label="@string/title_activity_tourist_point_add"
+            android:theme="@style/Theme.AndroidCRUD" />
+        <activity
+            android:name=".touristpoints.TouristPointUpdate"
+            android:exported="false"
+            android:label="@string/title_activity_tourist_point_update"
+            android:theme="@style/Theme.AndroidCRUD" />
+        <activity
+            android:name=".touristpoints.TouristPointRead"
+            android:exported="false"
+            android:label="@string/title_activity_tourist_point_read"
+            android:theme="@style/Theme.AndroidCRUD" />
+        <activity
+            android:name=".TouristPointItem"
+            android:exported="false"
+            android:label="@string/title_activity_tourist_point_item"
+            android:theme="@style/Theme.AndroidCRUD" />
+        <activity
+            android:name=".cities.CityCreate"
+            android:exported="false"
+            android:label="@string/title_activity_city_create"
+            android:theme="@style/Theme.AndroidCRUD" />
+        <activity
+            android:name=".cities.CityUpdate"
+            android:exported="false"
+            android:label="@string/title_activity_city_update"
+            android:theme="@style/Theme.AndroidCRUD" />
+        <activity
+            android:name=".cities.CityRead"
+            android:exported="false"
+            android:label="@string/title_activity_city_read"
+            android:theme="@style/Theme.AndroidCRUD" />
+        <activity
             android:name=".CityItem"
             android:exported="false"
             android:label="@string/title_activity_city_item"
@@ -27,7 +62,7 @@
             android:label="@string/title_activity_country_update"
             android:theme="@style/Theme.AndroidCRUD" />
         <activity
-            android:name=".TouristPointCRUD"
+            android:name=".touristpoints.TouristPointCRUD"
             android:exported="false"
             android:label="@string/title_activity_tourist_point_crud"
             android:theme="@style/Theme.AndroidCRUD" />

@@ -22,4 +22,7 @@ interface CountryDao {
 
     @Delete
     suspend fun deleteCountry(country: CountryEntity)
+
+    @Query("SELECT DISTINCT language FROM language_table")
+    fun getLanguages(): Flow<List<String>>
 }

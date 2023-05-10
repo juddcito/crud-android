@@ -33,6 +33,12 @@ class CityViewModel(
         }
     }
 
+    fun insertCity(city: CityEntity){
+        viewModelScope.launch {
+            cityDao.insertCity(city)
+        }
+    }
+
     fun deleteCity(city: CityEntity){
         viewModelScope.launch {
             cityDao.deleteCity(city)

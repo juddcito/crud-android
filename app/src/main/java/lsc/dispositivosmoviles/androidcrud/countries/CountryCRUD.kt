@@ -91,7 +91,7 @@ fun CountryApp(viewModel: CountryViewModel) {
                     )
                 }
             },
-            backgroundColor = Color(0XFF0D47A1),
+            backgroundColor = Color(0XFF4B8C4B ),
             navigationIcon = {
                 IconButton(
                     onClick = {
@@ -115,7 +115,7 @@ fun CountryApp(viewModel: CountryViewModel) {
                     ContextCompat.startActivity(context, intent, null)
                 },
                 modifier = Modifier.fillMaxWidth(),
-                colors = ButtonDefaults.buttonColors(backgroundColor = Color(0XFF42A5F5))
+                colors = ButtonDefaults.buttonColors(backgroundColor = Color(0XFF8BC34A))
             ) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Icon(
@@ -132,10 +132,12 @@ fun CountryApp(viewModel: CountryViewModel) {
                 }
             }
         }
+        println(state.languages)
         val itemsContinent = listOf("Continent", "America", "Europe", "Asia", "Africa", "Oceania")
-        val itemsLanguage = listOf("Language", "Spanish", "English", "French", "German", "Italian","Chinese","Japanese")
-        var selectedItemContinent by remember { mutableStateOf(itemsContinent.first()) }
-        var selectedItemLanguage by remember { mutableStateOf(itemsLanguage.first()) }
+        var itemsLanguage: List<String> by remember { mutableStateOf(emptyList()) }
+        itemsLanguage = state.languages
+        var selectedItemContinent by remember { mutableStateOf("Continent") }
+        var selectedItemLanguage by remember { mutableStateOf("Language") }
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -143,15 +145,15 @@ fun CountryApp(viewModel: CountryViewModel) {
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceEvenly
         ) {
-            Text(text = "FILTERS")
+            Text(text = "FILTERS",fontWeight = FontWeight.Bold)
             CustomComboBox(items = itemsContinent, selectedItem = selectedItemContinent, onItemSelected = { selectedItemContinent = it })
             CustomComboBox(items = itemsLanguage, selectedItem = selectedItemLanguage, onItemSelected = { selectedItemLanguage = it })
             IconButton(onClick = {
                 if((selectedItemContinent == "Continent") && (selectedItemLanguage == "Language")){
                     viewModel.getAllCountries()
-                } else if ((selectedItemContinent != "Continent") && (selectedItemLanguage == "Language")){
+                } else if ((selectedItemContinent != "Continent") && (selectedItemLanguage== "Language")){
                     viewModel.getFilteredCountriesByContinent(selectedItemContinent)
-                } else if ((selectedItemContinent == "Continent") && (selectedItemLanguage != "Language")){
+                } else if ((selectedItemContinent == "Continent") && (selectedItemLanguage!= "Language")){
                     viewModel.getFilteredCountriesByLanguage(selectedItemLanguage)
                 } else{
                     viewModel.getFilteredCountriesByContinentAndLanguage(selectedItemContinent,selectedItemLanguage)
@@ -164,8 +166,8 @@ fun CountryApp(viewModel: CountryViewModel) {
                 )
             }
             IconButton(onClick = {
-                selectedItemContinent = itemsContinent.first()
-                selectedItemLanguage = itemsLanguage.first()
+                selectedItemContinent = "Continent"
+                selectedItemLanguage = "Language"
                 viewModel.getAllCountries()
             }) {
                 Icon(

@@ -1,6 +1,9 @@
-package lsc.dispositivosmoviles.androidcrud.cities
+package lsc.dispositivosmoviles.androidcrud.touristpoints
 
 import android.content.Intent
+import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
@@ -17,12 +20,15 @@ import androidx.core.content.ContextCompat
 import lsc.dispositivosmoviles.androidcrud.R
 import lsc.dispositivosmoviles.androidcrud.countries.CountryRead
 import lsc.dispositivosmoviles.androidcrud.countries.CountryUpdate
-import lsc.dispositivosmoviles.androidcrud.data.CityEntity
+import lsc.dispositivosmoviles.androidcrud.countries.CountryViewModel
+import lsc.dispositivosmoviles.androidcrud.data.CountryEntity
+import lsc.dispositivosmoviles.androidcrud.data.TouristPointEntity
+import lsc.dispositivosmoviles.androidcrud.touristpoints.ui.theme.AndroidCRUDTheme
 
 @Composable
-fun CityItem(
-    city: CityEntity,
-    viewModel: CityViewModel
+fun TouristPointItemApp(
+    touristPoint: TouristPointEntity,
+    viewModel: TouristPointViewModel
 ) {
     val context = LocalContext.current
     Card(
@@ -35,9 +41,9 @@ fun CityItem(
         Column(
             modifier = Modifier.padding(16.dp)// ajusta el relleno dentro de la tarjeta
         ) {
-            city.name?.let { Text( it, fontSize = 18.sp, fontWeight = FontWeight.Bold) }
-            city.countryCode?.let { Text(it) }
-            city.population?.let { Text("Population: " +it.toString() ) }
+            touristPoint.name?.let { Text(it, fontSize = 18.sp, fontWeight = FontWeight.Bold) }
+            touristPoint.countryCode?.let { Text(it) }
+            touristPoint.cost?.let { Text(it.toString()) }
         }
         Row(
             horizontalArrangement = Arrangement.End,
@@ -46,8 +52,8 @@ fun CityItem(
         ) {
             IconButton(
                 onClick = {
-                    val intent = Intent(context, CityRead::class.java)
-                    intent.putExtra("city", city)
+                    val intent = Intent(context, TouristPointRead::class.java)
+                    intent.putExtra("touristPoint",touristPoint)
                     ContextCompat.startActivity(context,intent,null)
                 }
             ) {
@@ -59,8 +65,8 @@ fun CityItem(
             }
             IconButton(
                 onClick = {
-                    val intent = Intent(context, CityUpdate::class.java)
-                    intent.putExtra("city", city)
+                    val intent = Intent(context, TouristPointUpdate::class.java)
+                    intent.putExtra("touristPoint", touristPoint)
                     ContextCompat.startActivity(context,intent,null)
                 }
             ) {
@@ -71,7 +77,7 @@ fun CityItem(
                 )
             }
             IconButton(onClick = {
-                viewModel.deleteCity(city)
+                viewModel.deleteTouristPoint(touristPoint)
             }) {
                 Icon(
                     painterResource(id = R.drawable.delete),

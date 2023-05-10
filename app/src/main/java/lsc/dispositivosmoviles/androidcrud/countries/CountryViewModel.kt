@@ -6,9 +6,11 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.launch
 import lsc.dispositivosmoviles.androidcrud.data.CountryDao
 import lsc.dispositivosmoviles.androidcrud.data.CountryEntity
+import lsc.dispositivosmoviles.androidcrud.data.Language
 
 class CountryViewModel(
     private val dao: CountryDao
@@ -18,6 +20,11 @@ class CountryViewModel(
         viewModelScope.launch {
             dao.getCountries().collectLatest {
                 state = state.copy(countries = it)
+            }
+        }
+        viewModelScope.launch {
+            dao.getLanguages().collectLatest {
+                state = state.copy(languages = it)
             }
         }
     }

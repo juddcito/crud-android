@@ -9,4 +9,11 @@
     <string name="title_activity_country_update">CountryUpdate</string>
     <string name="title_activity_country_create">CountryCreate</string>
     <string name="title_activity_city_item">CityItem</string>
+    <string name="title_activity_city_read">CityRead</string>
+    <string name="title_activity_city_update">CityUpdate</string>
+    <string name="title_activity_city_create">CityCreate</string>
+    <string name="title_activity_tourist_point_item">TouristPointItem</string>
+    <string name="title_activity_tourist_point_read">TouristPointRead</string>
+    <string name="title_activity_tourist_point_update">TouristPointUpdate</string>
+    <string name="title_activity_tourist_point_add">TouristPointAdd</string>
 </resources>
